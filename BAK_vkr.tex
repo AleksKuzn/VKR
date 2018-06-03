@@ -1,0 +1,353 @@
+%
+% Шаблон для ВКР бакалавра
+%
+
+\documentclass[a4paper,12pt]{article}
+\usepackage[backend=biber,sorting=none,style=gost-numeric,autolang=other]{biblatex} % библиография
+\usepackage{mathtext} %русские буквы в формулах
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath}
+\usepackage{fancyvrb}
+\usepackage{formular}
+\usepackage{setspace} % управление междустрочными интервалами
+%поля документа
+\usepackage[left=3cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{misccorr} % точки в конце номеров разделов, использовать перед пакетом ccaption!
+\usepackage{ccaption} % изменения подписей к рисункам и табл.
+
+\usepackage[nooneline]{caption} 
+\captionsetup[table]{justification=raggedright} % заголовок таблицы выравнивается влево
+\captionsetup[figure]{justification=centering,labelsep=endash} % заголовок рисунка - по центру
+
+% отступ перед первым абзацем
+\usepackage{indentfirst}
+%вставка изображений
+\usepackage{graphicx}
+% счетчики
+\usepackage{totcount}
+% управление содержанием
+\usepackage{tocloft}
+% управление таблицами и рисунками
+\usepackage{float}
+
+\newcounter{mycitecount}                                %% Счётчик библиографии
+\AtEveryBibitem{\stepcounter{mycitecount}}              %% Работает для biblatex
+
+\usepackage[figure,      %
+            table,       %
+            mycitecount, xspace ]{totalcount}           %% Подсчёт общего количества объектов в документе
+
+% окружение для листингов - с нумерацией строк слева
+\DefineVerbatimEnvironment{MyCode}{Verbatim}{frame=lines,numbers=left,numberblanklines=false,framesep=5mm}
+
+% автоматическая нумерация листингов
+\newfloat{Program}{phb}{lop}
+\floatname{Program}{Листинг}
+\floatstyle{ruled}
+
+\setcounter{secnumdepth}{3} % глубина нумерации до подразделов
+
+%если нужны точки в оглавлении для разделов - раскомментируйте следующую команду
+%\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\addto\captionsrussian{%
+\renewcommand{\figurename}{Рисунок}%
+\renewcommand{\tablename}{Таблица}%
+}
+
+% дефис в подписи к рисункам
+\captiondelim{ -- } 
+
+% Настройки для окружений с подчеркиваниями для подписей и пр.
+\setFRMfontencoding{T2A}
+\setFRMdfontencoding{T2A}
+% thanks to A.Starikov
+\setFRMfontfamily{cmr}
+\setFRMdfontfamily{ptm}
+\setFRMdfontsize{10pt}
+
+% задает длину поля для подписи на титульной странице
+\newFRMfield{xtitlesign}{32mm}
+
+% поле для факультета или кафедры
+\newFRMfield{fcath}{65mm}
+
+%имя файла с библиографией в формате BibTex
+\addbibresource{rbiblio.bib}
+
+\begin{document}
+
+% счетчики страниц, рисунков, таблиц
+\regtotcounter{page}
+\regtotcounter{figure}
+\regtotcounter{table}
+
+\renewcommand{\refname}{\centerline{СПИСОК ИСПОЛЬЗОВАННОЙ ЛИТЕРАТУРЫ}} 
+\renewcommand{\contentsname}{\centerline{СОДЕРЖАНИЕ}} 
+%\renewcommand{\refname}{Список источников}  % По умолчанию "Список литературы" (article)
+%\renewcommand{\bibname}{Литература}  % По умолчанию "Литература" (book и report)
+
+% титульная страница
+\thispagestyle{empty}
+\begin{center} \small
+\textbf{МИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ РОССИЙСКОЙ ФЕДЕРАЦИИ}\\
+ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ
+ВЫСШЕГО  ОБРАЗОВАНИЯ\\
+«Национальный исследовательский ядерный университет «МИФИ»\\
+\textbf{Обнинский институт атомной энергетики} – \\
+филиал федерального государственного автономного образовательного учреждения высшего\\
+образования «Национальный исследовательский ядерный университет «МИФИ»\\
+(ИАТЭ НИЯУ МИФИ)
+\end{center}
+%\vfill
+\medskip
+
+% Направление подготовки следует уточнять,
+% магистры и бакалавры могут иметь разные наименования
+\begin{center}
+\begin{tabular}{rl}
+Отделение & \useFRMfield{fcath}[\large Интеллектуальные кибернетические системы] \\ 
+Направление подготовки & \useFRMfield{fcath}[\large Информационные системы и технологии] \\ 
+\end{tabular} 
+\end{center}
+
+\vfill
+
+\large 
+
+\begin{center}
+\textbf{\Large Выпускная квалификационная работа --- } \\
+\textbf{\Large бакалаврская работа}\\
+	
+	\medskip
+по направлению подготовки  \textbf{09.03.02 Информационные  \\ системы и технологии}\\
+
+Направленность (профиль) \textbf{Информационные технологии}
+	
+\vfill
+\vfill
+\medskip
+
+\textbf{\Large 
+		<<Разработка мобильного приложения для преобразования 2D фотографий в 3D вид>>
+	}
+	
+\end{center}
+
+\vspace{1cm}
+
+\begin{tabular*}{\textwidth}{p{78mm}p{33mm}p{64mm}}
+	Выполнил:\\студент гр. ИС-Б14 & \useFRMfield{xtitlesign} & Кузнецов~А.В.\\
+	& & \\
+	Руководитель ВКР,\\доцент отделения ИКС, к.т.н. & \useFRMfield{xtitlesign} & Мирзеабасов~О.А.  \\
+	& & \\
+	
+	Нормоконтроль & \useFRMfield{xtitlesign} & Бязрова~В.Ф. \\
+	& & \\
+	% Если нужно добавить консультанта - раскомментируйте две строчки ниже
+	%Консультант ВКР бакалавра\\организация, должность, звание  & \useFRMfield{xtitlesign} & К.О.Нсультант\\
+	%& & \\
+%	Рецензент\\к.ф.-м.н.,   & \useFRMfield{xtitlesign} & В.А. Чепурко\\
+	
+	& & \\
+	Выпускная квалификационная \\ работа допущена к защите & \useFRMfield{xtitlesign} &  \\
+	& & \\
+	Руководитель\\ образовательной программы \\
+	09.03.02 Информационные системы и технологии\\
+	доцент отделения ИКС, к.т.н.  & \useFRMfield{xtitlesign} &Мирзеабасов~О.А. \\
+	
+\end{tabular*}
+
+
+\vfill
+\large
+
+\begin{center}
+Обнинск, 2018 г
+\end{center}
+
+\onehalfspacing
+
+\pagebreak
+
+% реферат
+\thispagestyle{empty}
+
+\section*{\centering РЕФЕРАТ}
+
+\total{page} стр., \total{table} табл., \total{figure} рис., \totalmycitecounts ист. 
+
+ANDROID, JAVA, МОБИЛЬНОЕ ПРИЛОЖЕНИЕ, ПОЛЬЗОВАТЕЛЬСКИЙ ИНТЕРФЕЙС, UI/UX, КАРТА ГЛУБИНЫ, АНАЛИЗ, 3D, АНИМАЦИЯ, GIF
+
+Настоящая работа посвящена изучению методов получения трехмерных изображений из двумерных и разработке пользовательского интерфейса мобильного приложения для преобразования 2D фотографий в 3D вид. 
+
+Разработанная программа дает возможность преобразовывать простую фотографию в объемную картинку, в виде GIF.
+
+Работа посвящена --- кратко описать суть работы.
+
+Разработанная программа дает возможность --- что именно.
+
+\pagebreak
+\thispagestyle{empty}
+
+\section*{\centering ОПРЕДЕЛЕНИЯ}
+
+Референсы --- изображения или другие ресурсы для разработки графического интерфейса с учетом существующих, успешно работающих решений
+ 
+
+\pagebreak
+
+\section*{\centering ОБОЗНАЧЕНИЯ И СОКРАЩЕНИЯ}
+
+
+UI (user interface) --- пользовательский интерфейс\\
+UX (user experience) --- пользовательский опыт\\
+ПО –-- программное обеспечение\\
+
+
+
+\pagebreak
+
+
+
+\tableofcontents
+% если нужно добавить "Стр." над номерами страниц - раскомментируйте следующую команду
+%\addtocontents{toc}{~\hfill\textbf{Стр.}\par}
+
+\pagebreak
+
+\section*{\centering ВВЕДЕНИЕ}
+\addcontentsline{toc}{section}{ВВЕДЕНИЕ}
+\input{intro} % текст введения в файле intro.tex
+\pagebreak
+
+%\input{Post_zad}
+\pagebreak
+\input{part1}  % первая глава - в файле part1.tex
+\pagebreak
+\input{part2} % вторая глава - в файле part2.tex
+\pagebreak
+
+% если есть еще разделы - сохраните их в соответствующих файлах и раскомментируйте строки ниже, при необходимости добавьте еще
+%\input{part3}  % третья глава - в файле part3.tex
+%\pagebreak
+
+%\input{part4} % четвертая глава - в файле part4.tex
+%\pagebreak
+
+%\input{part5}  % пятая глава - в файле part5.tex
+%\pagebreak
+
+\section*{\centering ЗАКЛЮЧЕНИЕ}
+\addcontentsline{toc}{section}{ЗАКЛЮЧЕНИЕ}
+
+В ходе проделанной работы были исследованы методы  метода «дефокусировки» и семантического анализа.
+
+При создании пользовательского интерфейса приложения были проанализированы современные, с аналогичным функционалом мобильные приложения в целом. Был сделан акцент на необходимости создания современного, функционального и не перегруженного пользовательского интерфейса. В результате проведенного анализа был создан пользовательский интерфейс мобильного приложения для преобразования 2D фотографий в 3D вид.
+
+
+// Дубль
+В ходе проделанной работы изучил основы разработки мобильного приложения в среде Android Studio. Также была изучена работа алгоритма определения глубины изображения.
+
+При создании пользовательского интерфейса приложения был сделан акцент на необходимости создания современного, функционального и не перегруженного пользовательского интерфейса. В результате  было создано мобильное приложение, с помощью которого можно сделать снимок и сохранить его в галерею.
+
+
+В ходе проделанной работы была проведена --- описать результаты бурной деятельности по выполнению ВКР, разумно в виде списка выполненных задач.
+
+Разработанная программа позволяет --- перечислить основные функциональные характеристики и особенности.
+
+% оформление библиографии - вариант с БД
+\pagebreak
+
+\addcontentsline{toc}{section}{СПИСОК ИСПОЛЬЗОВАННОЙ ЛИТЕРАТУРЫ}
+% ВАЖНО: для корректного отображения в списке литературы ссылок на англ.языке в bibtex-описание источника следует добавить поле 
+% langid = {english}
+\printbibliography
+
+\pagebreak
+
+\section*{ \centering Приложение А} 
+\addcontentsline{toc}{section}{Приложение А}
+
+\begin{center}
+	Листинг 1 -- Часть кода реализации класса \verb|MainActivity|
+\end{center}
+
+
+\begin{MyCode}
+	
+	public class MainActivity extends AppCompatActivity {	
+		ImageView ivPreview;
+		String mCurrentPhotoPath;
+		@Override
+		protected void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.activity_main);
+			ivPreview = findViewById(R.id.image);
+			Button btn = findViewById(R.id.button);
+			btn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dispatchTakePictureIntent();
+				}
+			});
+		}
+		
+		private void dispatchTakePictureIntent() {
+			Intent pictureIntent = new Intent(
+			MediaStore.ACTION_IMAGE_CAPTURE);
+			Intent pictureIntent2 = new Intent(
+			MediaStore.ACTION_IMAGE_CAPTURE);
+			if(pictureIntent.resolveActivity(getPackageManager()) != null){
+				//Create a file to store the image
+				File photoFile = null;
+				try {
+					photoFile = createImageFile();
+				} catch (IOException ex) {
+					// Error occurred while creating the File		
+				}
+				if (photoFile != null) {
+					Uri photoURI = FileProvider.getUriForFile(this, getPackageName(), photoFile);
+					Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+					File f = new File(mCurrentPhotoPath);
+					mediaScanIntent.setData(photoURI);
+					this.sendBroadcast(mediaScanIntent);
+					pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+					photoURI);
+					startActivityForResult(pictureIntent2,
+					1);
+				}
+			}
+		}
+		
+		private File createImageFile() throws IOException {
+			// Create an image file name
+			String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+			String imageFileName = "JPEG_" + timeStamp + "_";
+			File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+			File image = File.createTempFile(
+			imageFileName,  /* prefix */
+			".jpg",         /* suffix */
+			storageDir      /* directory */
+			);
+			
+			// Save a file: path for use with ACTION_VIEW intents
+			mCurrentPhotoPath = image.getAbsolutePath();
+			return image;
+		}
+		
+		@Override
+		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+			if (requestCode == 1 && resultCode == RESULT_OK) {
+				Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+				ivPreview.setImageBitmap(imageBitmap);
+			}
+		}
+	}
+\end{MyCode}
+
+\end{document}          
+
